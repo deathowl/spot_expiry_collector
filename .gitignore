@@ -1,3 +1,5 @@
 .idea
 .build
+.tarballs
+.DS_STORE
 spot_expiry_collector
