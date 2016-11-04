@@ -67,7 +67,9 @@ func (c *terminationCollector) Collect(ch chan<- prometheus.Metric) {
 			} else {
 				ch <- prometheus.MustNewConstMetric(c.terminationIndicator, prometheus.GaugeValue, 1)
 				delta := termtime.Sub(time.Now())
-				ch <- prometheus.MustNewConstMetric(c.terminationTime, prometheus.GaugeValue, delta.Seconds())
+				if (delta.Seconds() > 0 ) {
+					ch <- prometheus.MustNewConstMetric(c.terminationTime, prometheus.GaugeValue, delta.Seconds())
+				}
 			}
 		}
 	}
