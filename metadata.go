@@ -1,8 +1,8 @@
 package main
 
 import (
-	log "github.com/Sirupsen/logrus"
 	"github.com/prometheus/client_golang/prometheus"
+	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -67,7 +67,7 @@ func (c *terminationCollector) Collect(ch chan<- prometheus.Metric) {
 			} else {
 				ch <- prometheus.MustNewConstMetric(c.terminationIndicator, prometheus.GaugeValue, 1)
 				delta := termtime.Sub(time.Now())
-				if (delta.Seconds() > 0 ) {
+				if delta.Seconds() > 0 {
 					ch <- prometheus.MustNewConstMetric(c.terminationTime, prometheus.GaugeValue, delta.Seconds())
 				}
 			}
